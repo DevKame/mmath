@@ -1,0 +1,11 @@
+
+
+body {
+    background-color: var(--prim);
+    color: var(--text-dark);
+    font-family: "Reg";
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Headlines";
+}
