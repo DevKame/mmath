@@ -84,7 +84,7 @@ interface GameData {
 // INSTANTIATION OF THE gameData OBJECT
 const gameData: GameData = reactive({
     total: [8, 10],
-    time: 900,
+    time: 1500,
     spectrum: [1, 10],
 });
 // PROVIDES REFERENCE OF gameData TO CHILDREN FOR MANIPULATION

@@ -18,7 +18,7 @@ const max = computed(() => {
             max = "4";
             break;
         case "time":
-            max = "5";
+            max = "7";
             break;
         case "spectrum":
             max = "4";

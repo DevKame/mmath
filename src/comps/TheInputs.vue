@@ -39,7 +39,7 @@ function sendDisplayValue(val: string): void {
     if(val === "home")
     {
         gameData.total = [8, 10];
-        gameData.time = 900;
+        gameData.time = 1500;
         gameData.spectrum = [1, 10];
     }
     emits("click-listener", val);
@@ -103,18 +103,24 @@ function setTimeData(val: string) {
     let value: number;
     switch(val) {
         case "1":
-            value = 900;
+            value = 1500;
             break;
         case "2":
-            value = 700;
+            value = 1200;
             break;
         case "3":
-            value = 500;
+            value = 900;
             break;
         case "4":
-            value = 300;
+            value = 700;
             break;
         case "5":
+            value = 500;
+            break;
+        case "6":
+            value = 300;
+            break;
+        case "7":
             value = 150;
             break;
     }

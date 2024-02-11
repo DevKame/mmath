@@ -112,12 +112,12 @@ async function startGame() {
         digits!.value!.classList.add("d-block");
         currentDigit.value = number;
         resolve(number);
-    }, gameData.time / 2));
+    }, gameData.time * .2));
 
     await new Promise(resolve => setTimeout(() => {
         digits!.value!.classList.remove("d-block");
         resolve(number);
-    }, gameData.time / 2));
+    }, gameData.time));
 
 
   }
@@ -141,7 +141,7 @@ function getTotalDigits(): number {
 function sendDisplayValue(val: string): void {
     
     gameData.total = [8, 10];
-    gameData.time = 900;
+    gameData.time = 1500;
     gameData.spectrum = [1, 10];
     emits("click-listener", val);
 }
