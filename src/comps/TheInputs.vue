@@ -29,22 +29,22 @@
 </template>
 
 <script lang="ts" setup>
-import {defineEmits, inject, onMounted} from "vue";
+import {defineEmits, inject} from "vue";
 let emits = defineEmits([
     "click-listener",
 ]);
 /** IF CLICKED, SENDS STRING "home" TO PARENT TO CHANGE DISPLAYED CONTENT
  *  @param {string} val     => "home" */
 function sendDisplayValue(val: string): void {
+    gameData.total = [8, 10];
+    gameData.time = 500;
+    gameData.spectrum = [1, 10];
     emits("click-listener", val);
 }
 interface InputObject {
     type: string;
     value: string
 }
-onMounted(() => {
-    console.log(gameData);
-})
 // DEFINES STRUCTURE OF THE gameData, VALUES ARE USED FOR THE GAME LATER
 interface GameData {
     total: [number, number];
@@ -56,7 +56,6 @@ const gameData: GameData = inject("game-data")!;
  *  MANIPULATE gameData
  *  @param {InputObject} val    => {type: string, value: string} */
 function handleReceivedValues(val: InputObject) {
-    console.clear();
     switch(val.type) {
         case "total":
             setTotalData(val.value);
@@ -68,8 +67,6 @@ function handleReceivedValues(val: InputObject) {
             setSpectrumData(val.value);
             break;
     }
-    console.log("GAMEDATA:");
-    console.table(gameData);
 }
 /** CALLBACK FOR CHANGING THE RANGE INPUT FOR TOTALS - gameData.total
  * @param {string} val  => INPUT VALUE */
@@ -95,7 +92,6 @@ function setTotalData(val: string) {
             break;
     }
     value = [min!, max!];
-    console.log(gameData);
     gameData.total = value;
 }
 /** CALLBACK FOR CHANGING THE RANGE INPUT FOR TIME - gameData.time

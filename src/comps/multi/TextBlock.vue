@@ -34,7 +34,12 @@ let props = defineProps([
 const emits = defineEmits([
     "send-value"
 ]);
-const gameData = inject("game-data");
+interface GameData {
+    total: [number, number];
+    time: number;
+    spectrum: [number, number];
+}
+const gameData: GameData = inject("game-data")!;
 const info = computed(() => {
     let value: string;
     switch(props.rangeType)
@@ -49,7 +54,7 @@ const info = computed(() => {
             value = "Digits reach from <span class='fw-bold'>" + gameData.spectrum[0] + "</span> to <span class='fw-bold'>" + gameData.spectrum[1] + "</span>";
             break;
     }
-    return value;
+    return value!;
 });
 const iconType = computed(() => {
     let icon: string;
@@ -64,10 +69,14 @@ const iconType = computed(() => {
             icon = "fa-solid fa-up-right-and-down-left-from-center";
             break;
     }
-    return icon;
+    return icon!;
 });
 
-function redirectValueToParent(val) {
+interface InputObject {
+    type: string;
+    value: string
+}
+function redirectValueToParent(val: InputObject) {
     emits("send-value", val);
 }
 </script>

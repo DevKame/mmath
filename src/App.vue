@@ -31,7 +31,6 @@ let display = ref<string>("home");
 /** CALLBACK FOR CLICKEVENTS: PROVIDED STRING DETERMINES WHAT TO SHOW NEXT
  * @param {string} val  =>  'home' | 'inputs' | 'inputs' */
 function setDisplay(val: string): void {
-  console.log(val);
   display.value = val;
 }
 

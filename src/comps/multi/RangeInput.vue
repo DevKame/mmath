@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import {defineProps, defineEmits, onMounted, computed} from "vue";
+import {defineProps, defineEmits, computed} from "vue";
 const props = defineProps([
     "rangeType",
 ]);
@@ -26,10 +26,6 @@ const max = computed(() => {
     }
     return max;
 });
-onMounted(() => {
-    console.clear();
-    console.log(props.rangeType);
-});
 // DEFINES STRUCTURE OF OBJECT DELIVERED TO PARENT COMPONENT
 interface InputObject {
     type: string;
@@ -38,10 +34,10 @@ interface InputObject {
 /** SENDS <input>´s VALUE TO PARENT COMP TO GENERATE A VALUE
  *  DEPENDANT OF ITS VALUE
  * @param {Event} e => EVENT FROM <input> */
-function sendValue(e) {
+function sendValue(e: Event) {
     const vObject: InputObject = {
         type: props.rangeType,
-        value: e.target.value,
+        value: e.target!.value,
     };
     emits("send-value", vObject);
 }
