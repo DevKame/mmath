@@ -12,8 +12,12 @@ import "./assets/styles/main.css";
 // FONTAWESOME
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+
+import { faPlay, faLayerGroup, faClock, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons';
 library.add(faPlay);
+library.add(faLayerGroup);
+library.add(faClock);
+library.add(faUpRightAndDownLeftFromCenter);
 
 // CUSTOM COMPS
 import TextBlock from "./comps/multi/TextBlock.vue";
