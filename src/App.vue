@@ -40,7 +40,7 @@
               <li>Font Awesome</li>
             </ul>
 
-            <p>Checkout source code on <a href="">GitHub</a></p>
+            <p>Checkout source code on <a href="https://github.com/DevKame/mmath" target="_blank">GitHub</a></p>
             <p class="mt-4">This simple application helps you train your brain on mental math</p>
             <p>You will be confronted with a sequence of different digits that are displayed one by one.</p>
             <p>After the last digit was displayed, you are able to enter the sum of all digits</p>
