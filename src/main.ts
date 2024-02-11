@@ -13,16 +13,18 @@ import "./assets/styles/main.css";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import { faPlay, faLayerGroup, faClock, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faLayerGroup, faClock, faUpRightAndDownLeftFromCenter, faMicrochip } from '@fortawesome/free-solid-svg-icons';
 library.add(faPlay);
 library.add(faLayerGroup);
 library.add(faClock);
 library.add(faUpRightAndDownLeftFromCenter);
+library.add(faMicrochip);
 
 // CUSTOM COMPS
 import TextBlock from "./comps/multi/TextBlock.vue";
 import ThePlay from "./comps/ThePlay.vue";
 import RangeInput from "./comps/multi/RangeInput.vue";
+import TheKamedin from "./comps/TheKamedin.vue";
 
 
 const app = createApp(App);
@@ -30,4 +32,5 @@ app.component("fa-icon", FontAwesomeIcon);
 app.component("text-block", TextBlock);
 app.component("the-play", ThePlay);
 app.component("range-input", RangeInput);
+app.component("the-kamedin", TheKamedin);
 app.mount('#app')

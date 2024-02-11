@@ -1,4 +1,5 @@
 <template>
+  <the-kamedin @show-stack="showTechstack"></the-kamedin>
   <transition mode="out-in">
     <div v-if="display === 'home'" class="homeWrapper d-flex flex-column justify-content-start align-items-center">
       <the-header></the-header>
@@ -19,6 +20,37 @@
         @click-listener="setDisplay"></the-game>
     </div>
   </transition>
+  <teleport to="body">
+    <transition name="stack">
+      <div v-if="showStack" @click="closeTechstack" class="stackBackdrop position-fixed d-flex justify-content-center align-items-center">
+        <div @click="closeTechstack" class="stackWindow d-flex flex-column justify-content-start align-items-center rounded-3">
+
+          <div class="stackHeader w-100 px-2 d-flex justify-content-start align-items-center">
+            <h2>Information</h2>
+          </div>
+
+          <div class="stackBody w-100 px-2 mt-5">
+            <h5>Tech Stack</h5>
+            <p>This application was made using</p>
+            <ul>
+              <li>Vue.js</li>
+              <li>JavaScript</li>
+              <li>TypeScript</li>
+              <li>Bootstrap</li>
+              <li>Font Awesome</li>
+            </ul>
+
+            <p>Checkout source code on <a href="">GitHub</a></p>
+            <p class="mt-4">This simple application helps you train your brain on mental math</p>
+            <p>You will be confronted with a sequence of different digits that are displayed one by one.</p>
+            <p>After the last digit was displayed, you are able to enter the sum of all digits</p>
+            <p>Beforehand you are able to set the total number of digits, the time as long each digit is displayed and the max value of each digit</p>
+          </div>
+        </div>
+
+      </div>
+    </transition>
+  </teleport>
 </template>
 
 <script lang="ts" setup>
@@ -34,6 +66,13 @@ function setDisplay(val: string): void {
   display.value = val;
 }
 
+function showTechstack() {
+  showStack.value = true;
+}
+function closeTechstack() {
+  showStack.value = false;
+}
+const showStack = ref<boolean>(false);
 // DEFINES STRUCTURE OF THE gameData, VALUES ARE USED FOR THE GAME LATER
 interface GameData {
     total: [number, number];
@@ -51,6 +90,33 @@ provide("game-data", gameData);
 </script>
 
 <style>
+.stackWindow {
+  width: clamp(300px, 90%, 500px);
+  background-color: var(--prim);
+  border: 3px solid black;
+  outline: 2px solid var(--green-dark);
+}
+.stack-enter-from,
+.stack-leave-to {
+  opacity: 0;
+  transform: scaleX(.8);
+}
+.stack-enter-active,
+.stack-leave-active {
+  transition: all .3s ease;
+}
+.stack-enter-to,
+.stack-leave-from {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.stackBackdrop {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.6);
+}
 .submitButton:hover::before,
 .backButton:hover::before {
     height: 100%;

@@ -36,6 +36,7 @@ import { inject, ref, defineEmits } from 'vue';
 const emits = defineEmits([
     "click-listener",
 ]);
+// INDICATOR IF THE GAME IS RUNNING OR NOT
 const gameRunning = ref<boolean>(false);
 interface GameData {
     total: [number, number];
@@ -43,22 +44,28 @@ interface GameData {
     spectrum: [number, number];
 }
 
+// DETERMINES IF YOUR GET THE RIGHT OR WRONG ALERT
 const answerWrong = ref<boolean>(false);
 const answerRight = ref<boolean>(false);
+// THE <input> WHERE USER ENTERS HIS RESULT
 const userResult = ref<HTMLInputElement>();
+// THE <p> THAT DISPLAYS THE DIGITS
 const digits = ref<HTMLParagraphElement>();
 
+// CONTAINING ALL DIGITS THAT ARE ABOUT TO BE DISPLAYED
 const allNumbers = ref<number[]>([]);
+// INJECTED GAMEDATA
 const gameData: GameData = inject("game-data")!;
-
+// VALUE OF THE CURRENTLY DISPLAYED DIGIT
 const currentDigit = ref<number>();
-
+//INDICATOR IF USER IS ALLOWED TO ENTER HIS RESULT NOW
 const userInputExpected = ref<boolean>(false);
-
+// INDICATOR IF THE FEEDBACK OF USERS RESULT CAN BE SHOWN NOW
 const feedback = ref<boolean>(false);
-
+// THE CORRECT RESULT OF ALL DIGITS
 let sum = ref<number>(0);
 
+// CHECKS IF THE USER RESULT IS CORRECT, HANDLES CORRESPONDIGN FEEDBACK
 function handleUserResult() {
     userInputExpected.value = false;
     if(+userResult.value!.value === sum.value)
@@ -82,6 +89,7 @@ function sumUp(all: number[]): number {
     }
     return sum;
 }
+// CLEARS ALL VALUES TO CREATE A STATE WHERE USER IS ABLE TO START A GAME
 function clearAll() {
     sum.value = 0;
     allNumbers.value.length = 0;
@@ -90,15 +98,13 @@ function clearAll() {
     answerWrong.value = false;
     answerRight.value = false;
 }
+// DISPLAYS THE DIGITS ONE BY ONE
 async function startGame() {
     clearAll();
     let totalNumbers: number = getTotalDigits();
     fillNumberArray(totalNumbers, allNumbers.value);
     currentDigit.value = allNumbers.value[0];
     sum.value = sumUp(allNumbers.value);
-
-
-
     gameRunning.value = true;
   for (const number of allNumbers.value) {
 
