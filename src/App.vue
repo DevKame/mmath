@@ -14,12 +14,12 @@
     <div v-else-if="display === 'inputs'">
       <the-inputs
         @click-listener="setDisplay"
-        @show-current="console.log('From App:');console.table(gameData)"></the-inputs>
+      ></the-inputs>
     </div>
     <div v-else-if="display === 'game'">
       <the-game
         @click-listener="setDisplay"
-        @show-current="console.log('From App:');console.table(gameData)"></the-game>
+      ></the-game>
     </div>
   </transition>
   <teleport to="body">
@@ -84,7 +84,7 @@ interface GameData {
 // INSTANTIATION OF THE gameData OBJECT
 const gameData: GameData = reactive({
     total: [8, 10],
-    time: 500,
+    time: 900,
     spectrum: [1, 10],
 });
 // PROVIDES REFERENCE OF gameData TO CHILDREN FOR MANIPULATION
