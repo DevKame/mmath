@@ -32,9 +32,10 @@
 
 
 <script lang="ts" setup>
-import { inject, ref, defineEmits } from 'vue';
+import { inject, ref, defineEmits, onMounted } from 'vue';
 const emits = defineEmits([
     "click-listener",
+    "show-current",
 ]);
 // INDICATOR IF THE GAME IS RUNNING OR NOT
 const gameRunning = ref<boolean>(false);
@@ -43,6 +44,13 @@ interface GameData {
     time: number;
     spectrum: [number, number];
 }
+// INJECTED GAMEDATA
+const gameData: GameData = inject("game-data")!;
+onMounted(() => {
+    console.log("from TheGame:");
+    console.table(gameData);
+    emits("show-current");
+});
 
 // DETERMINES IF YOUR GET THE RIGHT OR WRONG ALERT
 const answerWrong = ref<boolean>(false);
@@ -54,8 +62,6 @@ const digits = ref<HTMLParagraphElement>();
 
 // CONTAINING ALL DIGITS THAT ARE ABOUT TO BE DISPLAYED
 const allNumbers = ref<number[]>([]);
-// INJECTED GAMEDATA
-const gameData: GameData = inject("game-data")!;
 // VALUE OF THE CURRENTLY DISPLAYED DIGIT
 const currentDigit = ref<number>();
 //INDICATOR IF USER IS ALLOWED TO ENTER HIS RESULT NOW
@@ -108,6 +114,7 @@ async function startGame() {
     gameRunning.value = true;
   for (const number of allNumbers.value) {
 
+    console.log(gameData.time);
     await new Promise(resolve => setTimeout(() => {
         digits!.value!.classList.add("d-block");
         currentDigit.value = number;
@@ -134,6 +141,7 @@ function fillNumberArray(num: number, all: number[]): void {
 }
 // GETS THE AMOUNT OF DIGITS OUT OF gameData.total
 function getTotalDigits(): number {
+    console.table(gameData);
     return Math.floor(Math.random() * (gameData.total[1] - gameData.total[0] + 1) + gameData.total[0]);
 }
 /** IF CLICKED, SENDS STRING "home" TO PARENT TO CHANGE DISPLAYED CONTENT

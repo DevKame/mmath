@@ -13,11 +13,13 @@
     </div>
     <div v-else-if="display === 'inputs'">
       <the-inputs
-        @click-listener="setDisplay"></the-inputs>
+        @click-listener="setDisplay"
+        @show-current="console.log('From App:');console.table(gameData)"></the-inputs>
     </div>
     <div v-else-if="display === 'game'">
       <the-game
-        @click-listener="setDisplay"></the-game>
+        @click-listener="setDisplay"
+        @show-current="console.log('From App:');console.table(gameData)"></the-game>
     </div>
   </transition>
   <teleport to="body">
